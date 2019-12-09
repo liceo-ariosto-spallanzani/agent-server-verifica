@@ -13,5 +13,9 @@
     "fs-extra": "^8.1.0",
     "node-fetch": "^2.6.0",
     "simple-argv": "^2.0.2"
+  },
+  "devDependencies": {
+    "@soluzioni-futura/eslint-config-soluzioni-futura": "^1.1.0",
+    "eslint": "^6.6.0"
   }
 }
