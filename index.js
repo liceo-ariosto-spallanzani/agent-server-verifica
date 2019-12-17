@@ -7,8 +7,6 @@ const inputDirectory = join(workingDirectory, "input")
 const outputDirectory = join(workingDirectory, "output")
 const correctEx = new Set()
 
-writeFileSync(join(outputDirectory, "01.txt"), "jet")
-
 const getScore = () => fetch(`${url}/voto`)
   .then(res => res.json())
   .then(({ score }) => score || 0)
