@@ -7,7 +7,7 @@ const inputDirectory = join(workingDirectory, "input")
 const outputDirectory = join(workingDirectory, "output")
 const correctEx = new Set()
 
-if debug {
+if (debug) {
   console.log("DEBUG MODE")
 }
 
