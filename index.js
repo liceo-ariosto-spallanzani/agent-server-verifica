@@ -7,6 +7,10 @@ const inputDirectory = join(workingDirectory, "input")
 const outputDirectory = join(workingDirectory, "output")
 const correctEx = new Set()
 
+if debug {
+  console.log("DEBUG MODE")
+}
+
 const debugLog = (title, data) => {
   if (debug) {
     console.log(title, data)
@@ -120,6 +124,10 @@ const init = async () => {
 
     Promise.all(readdirSync(outputDirectory)
       .map(file => {
+        if (debug) {
+          console.log(file)
+        }
+
         let data
         try {
           data = readFileSync(join(outputDirectory, file), "utf8")
