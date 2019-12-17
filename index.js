@@ -1,11 +1,18 @@
 /* eslint-disable no-console */
-const { url = "http://192.168.1.231:8080", workingDirectory = __dirname, _ } = require("simple-argv")
+const { debug = false, url = "http://192.168.1.231:8080", workingDirectory = __dirname, _ } = require("simple-argv")
 const fetch = require("node-fetch")
 const { ensureDirSync, removeSync, readdirSync, readFileSync, writeFileSync } = require("fs-extra")
 const { join, parse } = require("path")
 const inputDirectory = join(workingDirectory, "input")
 const outputDirectory = join(workingDirectory, "output")
 const correctEx = new Set()
+
+const debugLog = (title, data) => {
+  if (debug) {
+    console.log(title, data)
+  }
+  return data
+}
 
 const getScore = () => fetch(`${url}/voto`)
   .then(res => res.json())
@@ -19,6 +26,7 @@ const logScore = async () => {
 
 const getServerStatus = () => fetch(`${url}/agent`)
   .then(res => res.json())
+  .then(data => debugLog("server status:", data))
   .catch(console.error)
 
 const auth = name => {
@@ -68,6 +76,7 @@ const sendOutput = (data, ex) => fetch(`${url}/esercizi/${ex}`, {
     }
     return res.json()
   })
+  .then(data => debugLog("send output:", data))
   .catch(console.error)
 
 const setupFolder = () => {
