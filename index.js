@@ -1,7 +1,8 @@
 /* eslint-disable no-console */
-const { debug = false, url = "http://192.168.1.231:8080", workingDirectory = __dirname, _ } = require("simple-argv")
+const workingDirectory = process.cwd()
+const { debug = false, url = "http://192.168.1.231:8080", _ } = require("simple-argv")
 const fetch = require("node-fetch")
-const { ensureDirSync, removeSync, readdirSync, readFileSync, writeFileSync } = require("fs-extra")
+const { ensureDirSync, readdirSync, readFileSync, writeFileSync } = require("fs-extra")
 const { join, parse } = require("path")
 const inputDirectory = join(workingDirectory, "input")
 const outputDirectory = join(workingDirectory, "output")
@@ -85,7 +86,6 @@ const sendOutput = (data, ex) => fetch(`${url}/esercizi/${ex}`, {
 
 const setupFolder = () => {
   ensureDirSync(workingDirectory)
-  removeSync(inputDirectory)
   ensureDirSync(inputDirectory)
   ensureDirSync(outputDirectory)
 }
@@ -116,7 +116,7 @@ const init = async () => {
   const data = await getInputs()
 
   data.forEach((data, i) => {
-    writeFileSync(join(inputDirectory, (i + 1).toString()), JSON.stringify(data))
+    writeFileSync(join(inputDirectory, (i + 1).toString()), data)
   })
 
   setInterval(() => {
